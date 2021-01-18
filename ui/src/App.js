@@ -65,9 +65,9 @@ class App extends Component {
     const result = this.state.result;
 
     var sepalLengths = []
-    for (var i = 4; i <= 7; i = +(i + 0.1).toFixed(1)) {
+    /*for (var i = 4; i <= 42.2; i = +(i + 0.1).toFixed(1)) {
       sepalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    }
+    }*/
     var sepalWidths = []
     for (var i = 2; i <= 4; i = +(i + 0.1).toFixed(1)) {
       sepalWidths.push(<option key = {i} value = {i}>{i}</option>);
@@ -83,19 +83,18 @@ class App extends Component {
     return (
       <Container>
         <div>
-          <h1 className="title">Iris Plant Classifier</h1>
+          <h1 className="title">Online Diabetes Predictor</h1>
         </div>
         <div className="content">
+          // Pregnancies	Glucose	BloodPressure	SkinThickness	Insulin	BMI	DiabetesPedigreeFunction	Age	Outcome
           <Form>
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Label>Sepal Length</Form.Label>
                 <Form.Control 
-                  as="select"
                   value={formData.sepalLength}
                   name="sepalLength"
                   onChange={this.handleChange}>
-                  {sepalLengths}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
@@ -108,6 +107,22 @@ class App extends Component {
                   {sepalWidths}
                 </Form.Control>
               </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Sepal Length</Form.Label>
+                <Form.Control 
+                  value={formData.sepalLength}
+                  name="sepalLength"
+                  onChange={this.handleChange}>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Sepal Length</Form.Label>
+                <Form.Control 
+                  value={formData.sepalLength}
+                  name="sepalLength"
+                  onChange={this.handleChange}>
+                </Form.Control>
+              </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col}>
@@ -118,6 +133,26 @@ class App extends Component {
                   name="petalLength"
                   onChange={this.handleChange}>
                   {petalLengths}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Petal Width</Form.Label>
+                <Form.Control 
+                  as="select"
+                  value={formData.petalWidth}
+                  name="petalWidth"
+                  onChange={this.handleChange}>
+                  {petalWidths}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Petal Width</Form.Label>
+                <Form.Control 
+                  as="select"
+                  value={formData.petalWidth}
+                  name="petalWidth"
+                  onChange={this.handleChange}>
+                  {petalWidths}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>

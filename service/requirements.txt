@@ -19,3 +19,5 @@ six # ==1.12.0
 sklearn # ==0.0
 Werkzeug==0.16.1
 wget # ==3.2
+xgboost
+pandas-profiling[notebook]==2.9.0

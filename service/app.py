@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, make_response
 from flask_restplus import Api, Resource, fields
-# from sklearn.externals import joblib
+from diabetes_predictor import predict_diabetes_probability
 import joblib
 import numpy as np
 import sys
@@ -8,8 +8,8 @@ import sys
 flask_app = Flask(__name__)
 app = Api(app = flask_app, 
 		  version = "1.0", 
-		  title = "Iris Plant identifier", 
-		  description = "Predict the type of iris plant")
+		  title = "Online Diabetes Predictor", 
+		  description = "Online Diabetes Predictor")
 
 name_space = app.namespace('prediction', description='Prediction APIs')
 
@@ -44,12 +44,14 @@ class MainClass(Resource):
 		try: 
 			formData = request.json
 			data = [val for val in formData.values()]
-			prediction = classifier.predict(np.array(data).reshape(1, -1))
-			types = { 0: "Iris Setosa", 1: "Iris Versicolour ", 2: "Iris Virginica"}
+			prediction = predict_diabetes_probability(data)
+			#prediction = classifier.predict(np.array(data).reshape(1, -1))
+			#types = { 0: "Iris Setosa", 1: "Iris Versicolour ", 2: "Iris Virginica"}
+			
 			response = jsonify({
 				"statusCode": 200,
 				"status": "Prediction made",
-				"result": "The type of iris plant is: " + types[prediction[0]]
+				"result": "Probability of diabetes: " + prediction[0]
 				})
 			response.headers.add('Access-Control-Allow-Origin', '*')
 			return response
