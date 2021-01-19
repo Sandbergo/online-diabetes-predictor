@@ -17,29 +17,33 @@
 <br> 
 
 ## 🧐 About <a name = "about"></a>
-...
+Simple Web app for requesting the evaluation of a Machine Learning model of the probability of the patient suffering from diabetes. 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-All requirements are listed in the 'requirements.txt'-file, simply run the following commands:
+To run the app locally, follow these instructions:
 
 ```
-sudo apt-get install python3.8.2
-sudo apt-get install python3-pip
 git clone https://github.com/Sandbergo/online-diabetes-predictor.git
 cd online-diabetes-predictor
 ```
 now, to activate the frontend locally:
 ```
+cd ui
 npm install -g serve
 npm run build
 serve -s build -l 3000
 ```
 Then, activate the backend:
 ```
+cd service
+sudo apt-get install python3.8.2
+sudo apt-get install python3-pip
+pip install virtualenv
 virtualenv env
 source env/bin/activate 
 pip install -r requirements.txt
+python diabetes_predictor.py
 FLASK_APP=app.py flask run
 ```
 
@@ -48,7 +52,8 @@ FLASK_APP=app.py flask run
 - [Pandas](https://pandas.pydata.org/)
 - [Scikit-learn](https://scikit-learn.org/stable/)
 - [XGBoost](https://xgboost.readthedocs.io/en/latest/)
-    
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [React](https://reactjs.org/)
     
 ## ✍️ Authors <a name = "authors"></a>
 - Lars Sandberg [@Sandbergo](https://github.com/Sandbergo)

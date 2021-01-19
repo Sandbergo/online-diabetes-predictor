@@ -15,10 +15,14 @@ class App extends Component {
     this.state = {
       isLoading: false,
       formData: {
-        sepalLength: 4,
-        sepalWidth: 2,
-        petalLength: 1,
-        petalWidth: 0
+        Pregnancies: 0.0,
+        Glucose: 0.0,
+        BloodPressure: 0.0,
+        SkinThickness: 0.0,
+        Insulin: 0.0,
+        BMI: 0.0,
+        DiabetesPedigreeFunction: 0.0,
+        Age: 0.0
       },
       result: ""
     };
@@ -64,10 +68,10 @@ class App extends Component {
     const formData = this.state.formData;
     const result = this.state.result;
 
-    var sepalLengths = []
-    /*for (var i = 4; i <= 42.2; i = +(i + 0.1).toFixed(1)) {
+    /*var sepalLengths = []
+    for (var i = 4; i <= 42.2; i = +(i + 0.1).toFixed(1)) {
       sepalLengths.push(<option key = {i} value = {i}>{i}</option>);
-    }*/
+    }
     var sepalWidths = []
     for (var i = 2; i <= 4; i = +(i + 0.1).toFixed(1)) {
       sepalWidths.push(<option key = {i} value = {i}>{i}</option>);
@@ -79,7 +83,7 @@ class App extends Component {
     var petalWidths = []
     for (var i = 0.1; i <= 3; i = +(i + 0.1).toFixed(1)) {
       petalWidths.push(<option key = {i} value = {i}>{i}</option>);
-    }
+    }*/
     return (
       <Container>
         <div>
@@ -90,79 +94,69 @@ class App extends Component {
           <Form>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Sepal Length</Form.Label>
+                <Form.Label>Pregnancies</Form.Label>
                 <Form.Control 
-                  value={formData.sepalLength}
-                  name="sepalLength"
+                  value={formData.Pregnancies}
+                  name="Pregnancies"
                   onChange={this.handleChange}>
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Sepal Width</Form.Label>
+                <Form.Label>Glucose</Form.Label>
                 <Form.Control 
-                  as="select"
-                  value={formData.sepalWidth}
-                  name="sepalWidth"
-                  onChange={this.handleChange}>
-                  {sepalWidths}
-                </Form.Control>
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Sepal Length</Form.Label>
-                <Form.Control 
-                  value={formData.sepalLength}
-                  name="sepalLength"
+                  value={formData.Glucose}
+                  name="Glucose"
                   onChange={this.handleChange}>
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Sepal Length</Form.Label>
+                <Form.Label>Blood pressure</Form.Label>
                 <Form.Control 
-                  value={formData.sepalLength}
-                  name="sepalLength"
+                  value={formData.BloodPressure}
+                  name="BloodPressure"
+                  onChange={this.handleChange}>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Skin thickness</Form.Label>
+                <Form.Control 
+                  value={formData.SkinThickness}
+                  name="SkinThickness"
                   onChange={this.handleChange}>
                 </Form.Control>
               </Form.Group>
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Petal Length</Form.Label>
+                <Form.Label>Insulin</Form.Label>
                 <Form.Control 
-                  as="select"
-                  value={formData.petalLength}
-                  name="petalLength"
+                  value={formData.Insulin}
+                  name="Insulin"
                   onChange={this.handleChange}>
-                  {petalLengths}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Petal Width</Form.Label>
+                <Form.Label>BMI</Form.Label>
                 <Form.Control 
-                  as="select"
-                  value={formData.petalWidth}
-                  name="petalWidth"
+                  value={formData.BMI}
+                  name="BMI"
                   onChange={this.handleChange}>
-                  {petalWidths}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Petal Width</Form.Label>
+                <Form.Label>DiabetesPedigreeFunction</Form.Label>
                 <Form.Control 
-                  as="select"
-                  value={formData.petalWidth}
-                  name="petalWidth"
+                  value={formData.DiabetesPedigreeFunction}
+                  name="DiabetesPedigreeFunction"
                   onChange={this.handleChange}>
-                  {petalWidths}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Petal Width</Form.Label>
+                <Form.Label>Age</Form.Label>
                 <Form.Control 
-                  as="select"
-                  value={formData.petalWidth}
-                  name="petalWidth"
+                  value={formData.Age}
+                  name="Age"
                   onChange={this.handleChange}>
-                  {petalWidths}
                 </Form.Control>
               </Form.Group>
             </Form.Row>

@@ -1,10 +1,10 @@
-import joblib
 import pandas as pd
 import numpy as np
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import model_selection
 from sklearn.utils import resample
+from typing import List
 
 
 def train_model():
@@ -37,12 +37,14 @@ def train_model():
     #print(f'Average cross-validation accuracy: {round(results.mean(), 4)}')
 
 
-def predict_diabetes_probability(data: list[float]) -> float:
+def predict_diabetes_probability(data: List[float]) -> float:
+    print('Predicting...')
     xgb_model = XGBClassifier()
+    print('Loading model...')
     xgb_model.load_model('xgb.hdf5')
-
-    prediction = xgb_model.predict_proba(np.array(data).reshape(1, -1))
-    print(prediction[0][1])
+    print('Making Prediction...')
+    prediction = xgb_model.predict_proba(np.array(data).reshape(1, -1))[0][1]
+    print(f'Predicted probability {round(prediction*100}')
     return prediction
 
 
