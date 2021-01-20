@@ -29,14 +29,14 @@ cd online-diabetes-predictor
 ```
 now, to activate the frontend locally:
 ```
-cd ui
+cd frontend
 npm install -g serve
 npm run build
 serve -s build -l 3000
 ```
 Then, activate the backend:
 ```
-cd service
+cd backend
 sudo apt-get install python3.8.2
 sudo apt-get install python3-pip
 pip install virtualenv
