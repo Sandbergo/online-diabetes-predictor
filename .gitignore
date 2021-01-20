@@ -132,3 +132,4 @@ dmypy.json
 .vscode/*
 profile_report.html
 *.db
+*.png
