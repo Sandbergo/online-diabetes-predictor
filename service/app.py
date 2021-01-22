@@ -1,70 +1,75 @@
 """
-Flask based application, relies on diabetes?predictor.py
+FastAPI based API for predicting diabetes, relies on diabetes_predictor.py.
 """
-
-from flask import Flask, request, jsonify, make_response
-from flask_restplus import Api, Resource, fields
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from diabetes_predictor import predict_diabetes_probability
 
 
-flask_app = Flask(__name__)
-app = Api(app=flask_app, version="1.0",
-          title="Online Diabetes Predictor",
-          description="Online Diabetes Predictor")
+app = FastAPI(
+    title="Online Diabetes Predictor",
+    description="Predicts probability of diabetes from physiological data",
+    version="0.9.0",
+)
 
-name_space = app.namespace('prediction', description='Prediction APIs')
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
 
-model = app.model('Prediction params',
-    {'Pregnancies': fields.Float(
-        required=True, description="Pregnancies", help="Number of pregnancies"),
-     'Glucose': fields.Float(
-        required=True, description="Glucose", help="Glucose level"),
-     'BloodPressure': fields.Float(
-        required=True, description="BloodPressure", help="Blood pressure"),
-     'SkinThickness': fields.Float(
-        required=True, description="SkinThickness", help="Skin thickness"),
-     'Insulin': fields.Float(
-        required=True, description="Insulin", help="Insulin level"),
-     'BMI': fields.Float(
-        required=True, description="BMI", help="Body Mass Inex"),
-     'DiabetesPedigreeFunction': fields.Float(
-        required=True, description="DiabetesPedigreeFunction", help="Diabetes pedigree function"),
-     'Age': fields.Float(
-        required=True, description="Age", help="Age")})
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
-@name_space.route("/")
-class MainClass(Resource):
+class params(BaseModel):
+    Pregnancies: float
+    Glucose: float
+    BloodPressure: float
+    SkinThickness: float
+    Insulin: float
+    BMI: float
+    DiabetesPedigreeFunction: float
+    Age: float
 
-    def options(self):
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "*")
-        response.headers.add('Access-Control-Allow-Methods', "*")
+
+class response(BaseModel):
+    statusCode: int
+    status: str
+    result: str
+
+
+@app.post("/prediction/", response_model=response, status_code=200)
+def get_prediction(payload: params):
+    """
+    Returns JSON response upon prediction request
+    """
+    print('response requested')
+    try:
+        formData = payload.dict()
+        data = [float(val) for val in formData.values()]
+        prediction = predict_diabetes_probability(data)
+
+        response = {
+            "statusCode": 200,
+            "status": "Prediction made",
+            "result": f"Probability of diabetes: {round(prediction*100)} %"
+            }
         return response
+    except Exception as error:
+        # print(f'Error: \n{error}')
+        return {
+            "statusCode": 500,
+            "status": "Could not make prediction",
+            "error": str(error)
+        }
 
-    @app.expect(model)
-    def post(self):
-        """
-        Returns JSON response upon prediction request
-        """
-        print('response requested')
-        try:
-            formData = request.json
-            data = [float(val) for val in formData.values()]
-            print('data: ', data)
-            prediction = predict_diabetes_probability(data)
 
-            response = jsonify({
-                "statusCode": 200,
-                "status": "Prediction made",
-                "result": f"Probability of diabetes: {round(prediction*100)} %"
-                })
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
-        except Exception as error:
-            return jsonify({
-                "statusCode": 500,
-                "status": "Could not make prediction",
-                "error": str(error)
-            })
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=5000)

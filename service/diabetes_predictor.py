@@ -62,7 +62,7 @@ def predict_diabetes_probability(data: List[float], verbose=True) -> float:
     xgb_model.load_model('xgb.hdf5')
     print('Making Prediction...\n' if verbose else "", end="")
     prediction = xgb_model.predict_proba(np.array(data).reshape(1, -1))[0][1]
-    print(f'Predicted probability {round(prediction*100)}\n %' if verbose else "", end="")
+    print(f'Predicted probability {round(prediction*100)} %\n' if verbose else "", end="")
     return prediction
 
 

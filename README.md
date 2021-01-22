@@ -34,7 +34,7 @@ npm install -g serve
 npm run build
 serve -s build -l 3000
 ```
-Then, activate the backend:
+Then, activate the api:
 ```
 cd backend
 sudo apt-get install python3.8.2
@@ -44,7 +44,7 @@ virtualenv env
 source env/bin/activate 
 pip install -r requirements.txt
 python diabetes_predictor.py
-FLASK_APP=app.py flask run
+python app.py
 ```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
@@ -52,11 +52,11 @@ FLASK_APP=app.py flask run
 - [Pandas](https://pandas.pydata.org/)
 - [Scikit-learn](https://scikit-learn.org/stable/)
 - [XGBoost](https://xgboost.readthedocs.io/en/latest/)
-- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [FastAPI](https://fastapi.tiangolo.com/)
 - [React](https://reactjs.org/)
     
 ## ✍️ Authors <a name = "authors"></a>
 - Lars Sandberg [@Sandbergo](https://github.com/Sandbergo)
 
 ## 🎉 Acknowledgements
-https://towardsdatascience.com/create-a-complete-machine-learning-web-application-using-react-and-flask-859340bddb33
+- Kharan Baharot Flask + React template [@kb22/ML-React-App-Template](https://github.com/kb22/ML-React-App-Template)
